@@ -37,7 +37,7 @@ services:
     ports:
     - 9187:9187
     environment:
-      DATA_SOURCE_NAME: postgresql://dockeruser:abc123!@localhost:5432/pets?sslmode=disable
+      DATA_SOURCE_NAME: postgresql://dockeruser:abc123!@db:5432/pets?sslmode=disable
         
 volumes:
   pg-data:
