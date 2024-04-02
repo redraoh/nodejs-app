@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('pre cleanup') {
             steps {
-                sh 'docker rm -f $(docker ps -qa)'
+                sh 'docker rm -f nodejs-app'
             }
         }
         stage('git scm update') {
