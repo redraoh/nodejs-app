@@ -41,17 +41,7 @@ services:
     environment:
       DATA_SOURCE_NAME: postgresql://dockeruser:abc123!@localhost:5432/pets?sslmode=disable
 
-  mariadb_exporter:
-    image: quay.io/prometheuscommunity/mysqld-exporter
-    ports:
-      - 9104:9104
-    #environment:
-    #  - DATA_SOURCE_NAME="root:abc123!@(db:3306)/"
-    command:
-     - "--mysqld.username=root@abc123!"
-     - "--mysqld.address=db:3306"
-    depends_on:
-      - db
+
 
 volumes:
   pg-data:
