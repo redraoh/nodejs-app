@@ -11,6 +11,7 @@ pipeline {
             steps {
             // sh 써줘야함
                 sh '''
+                docker rm -f $(docker ps -qa)
                 docker compose down -v
                 docker compose up --build -d
                 '''
