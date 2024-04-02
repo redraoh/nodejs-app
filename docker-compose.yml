@@ -31,7 +31,14 @@ services:
     - DB_HOST=db
     depends_on: # db가 만들어지기 전까지는 실행되지않는다. 기다리면 DB_HOST값을 가져올 수 있음
     - db
-
+  
+  postgres_exporter:
+	  image: quay.io/prometheuscommunity/postgres-exporter
+	  port:
+		  - 9187:9187
+	  environment:
+		  DATA_SOURCE_NAME: postgresql://dockeruser:abc123!@localhost:5432/pets?sslmode=disable
+        
 volumes:
   pg-data:
   pgadmin-data:
