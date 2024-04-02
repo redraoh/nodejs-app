@@ -2,6 +2,11 @@ pipeline {
     agent any
 
     stages {
+        stage('pre cleanup') {
+            steps {
+                sh "docker rm -f $(docker ps -qa)"
+            }
+        }
         stage('git scm update') {
             steps {
                 git url: 'https://github.com/redraoh/nodejs-app.git', branch: 'main'
@@ -11,7 +16,6 @@ pipeline {
             steps {
             // sh 써줘야함
                 sh '''
-                docker rm -f $(docker ps -qa)
                 docker compose down -v
                 docker compose up --build -d
                 '''
