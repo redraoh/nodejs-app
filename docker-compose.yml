@@ -32,7 +32,7 @@ services:
     - pgadmin-data:/var/lib/pgadmin
 
   web:
-    image: zzyzzy/webapp
+    image: redraoh/webapp
     build: web
     ports:
     - 3001:3001
