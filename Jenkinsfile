@@ -1,12 +1,7 @@
 pipeline {
-    agent any
+    agent { label 'agent' }
 
     stages {
-        stage('pre cleanup') {
-            steps {
-                sh 'docker compose down -v'
-            }
-        }
         stage('git scm update') {
             steps {
                 git url: 'https://github.com/redraoh/nodejs-app.git', branch: 'main'
@@ -14,11 +9,20 @@ pipeline {
         }
         stage('docker build & deploy') {
             steps {
-            // sh 써줘야함
+		sh 'IMAGE_NAME=redraoh/nodejsapp docker compose build'
+            }
+        }
+	stage('docker hub push') {
+            steps {
                 sh '''
-                docker compose down -v
-                docker compose up --build -d
-                '''
+ 		   docker login -u redraoh -p dckr_pat_-0m26YU2bcpDJHxnQkbnbT6yP8A
+                   docker push siestageek/nodejsapp
+		'''
+            }
+        }
+	stage('microk8s run pod') {
+            steps {
+                sh ' microk8s kubectl run app1 --image=redraoh/nodejsapp '
             }
         }
     }
