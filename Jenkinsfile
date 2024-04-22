@@ -16,7 +16,7 @@ pipeline {
             steps {
                 sh '''
  		   docker login -u redraoh -p dckr_pat_-0m26YU2bcpDJHxnQkbnbT6yP8A
-                   docker push siestageek/nodejsapp
+                   docker push redraoh/nodejsapp
 		'''
             }
         }
